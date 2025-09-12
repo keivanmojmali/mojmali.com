@@ -1,7 +1,7 @@
 <template>
-  <div style="height: 300vh; position: relative;">
+  <div style="height: 100vh; display: flex; flex-direction: column;">
     <!-- Main Content Section -->
-    <section class="home-hero" style="background-color: #5ea85e; height: 100vh; padding: 2rem 2rem; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; z-index: 1;">
+    <section class="home-hero" style="background-color: #5ea85e; flex: 1; padding: 2rem 2rem; display: flex; flex-direction: column;">
       <div style="width: 100%; max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
 
         <!-- JUICE Logo SVG -->
@@ -58,48 +58,7 @@
 
   </div>
 
-  <!-- Scroll-triggered bottom section -->
-  <div
-    class="bottom-section"
-    :style="{
-      transform: `translateY(${bottomSectionOffset}px)`,
-    }"
-  >
-    <div class="bottom-content">
-      <h2>Welcome to the Next Section</h2>
-      <p>This clean white panel slides up as you scroll</p>
-    </div>
-  </div>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-
-const scrollY = ref(0)
-const bottomSectionOffset = ref(450) // Start with 50px visible at bottom
-
-const handleScroll = () => {
-  scrollY.value = window.scrollY
-
-  // Calculate how much to reveal based on scroll position
-  // Start revealing after 50px of scroll, stops lower to preserve more JUICE visibility
-  const maxScroll = 600
-  const minScroll = 50
-  const scrollProgress = Math.max(0, Math.min(1, (scrollY.value - minScroll) / (maxScroll - minScroll)))
-
-  // Move from 450px hidden to -430px (shows 50px initially, stops 150px from top)
-  bottomSectionOffset.value = 450 - (scrollProgress * 880)
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  handleScroll() // Initial call
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
-</script>
 
 <style scoped>
 .content-container {
@@ -194,61 +153,4 @@ onUnmounted(() => {
   }
 }
 
-.bottom-section {
-  position: fixed;
-  bottom: 0;
-  left: 2rem;
-  right: 2rem;
-  height: 500px;
-  background: white;
-  z-index: 5;
-  transition: transform 0.1s ease-out;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-  border-radius: 12px 12px 0 0;
-}
-
-.bottom-content {
-  padding: 2rem;
-  color: #2D3748;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.bottom-content h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #2D3748;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.bottom-content p {
-  font-size: 1.2rem;
-  color: #4A5568;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-@media (max-width: 768px) {
-  .bottom-section {
-    height: 400px;
-    left: 1rem;
-    right: 1rem;
-  }
-
-  .bottom-content {
-    padding: 1.5rem;
-  }
-
-  .bottom-content h2 {
-    font-size: 1.5rem;
-  }
-
-  .bottom-content p {
-    font-size: 1rem;
-  }
-}
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div style="min-height: 100vh; display: flex; flex-direction: column;">
+  <div style="height: 300vh; position: relative;">
     <!-- Main Content Section -->
-    <section class="home-hero" style="background-color: #5ea85e; min-height: 150vh; padding: 2rem 2rem; display: flex; flex-direction: column;">
+    <section class="home-hero" style="background-color: #5ea85e; height: 100vh; padding: 2rem 2rem; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; z-index: 1;">
       <div style="width: 100%; max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
 
         <!-- JUICE Logo SVG -->
@@ -72,19 +72,19 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const scrollY = ref(0)
-const bottomSectionOffset = ref(300) // Start mostly hidden, only peek 50px
+const bottomSectionOffset = ref(300) // Start mostly hidden, scroll up to cover half of JUICE
 
 const handleScroll = () => {
   scrollY.value = window.scrollY
 
   // Calculate how much to reveal based on scroll position
-  // Start revealing after 100px of scroll, fully revealed at 400px
-  const maxScroll = 400
-  const minScroll = 100
+  // Start revealing after 50px of scroll, fully revealed and covering half JUICE at 600px
+  const maxScroll = 600
+  const minScroll = 50
   const scrollProgress = Math.max(0, Math.min(1, (scrollY.value - minScroll) / (maxScroll - minScroll)))
 
-  // Move from 300px hidden to 0px (fully visible)
-  bottomSectionOffset.value = 300 - (scrollProgress * 300)
+  // Move from 300px hidden to -200px (covering half the JUICE logo)
+  bottomSectionOffset.value = 300 - (scrollProgress * 500)
 }
 
 onMounted(() => {
@@ -195,9 +195,9 @@ onUnmounted(() => {
   bottom: 0;
   left: 2rem;
   right: 2rem;
-  height: 350px;
+  height: 70vh;
   background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-  z-index: 10;
+  z-index: 5;
   transition: transform 0.1s ease-out;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
   border-radius: 12px 12px 0 0;
@@ -229,7 +229,7 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .bottom-section {
-    height: 250px;
+    height: 60vh;
     left: 1rem;
     right: 1rem;
   }

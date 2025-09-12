@@ -36,16 +36,20 @@
 
           <!-- Right Images Content -->
           <div class="images-content">
+          <a href="https://github.com/keivanmojmali" target="_blank">
             <img
-              src="/gh-patch.png"
-              alt="GitHub Patch"
-              class="patch-image"
-            />
-            <img
-              src="/li-patch.png"
-              alt="LinkedIn Patch"
-              class="patch-image"
-            />
+                src="/gh-patch.png"
+                alt="GitHub Patch"
+                class="patch-image"
+              />
+          </a>
+            <a href="https://www.linkedin.com/in/keivanmojmali/" target="_blank">
+              <img
+                src="/li-patch.png"
+                alt="LinkedIn Patch"
+                class="patch-image"
+              />
+            </a>
           </div>
         </div>
 

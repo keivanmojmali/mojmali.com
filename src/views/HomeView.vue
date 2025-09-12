@@ -72,7 +72,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const scrollY = ref(0)
-const bottomSectionOffset = ref(450) // Start lower, show more of main page
+const bottomSectionOffset = ref(100) // Start much lower, only small peek visible
 
 const handleScroll = () => {
   scrollY.value = window.scrollY
@@ -83,8 +83,8 @@ const handleScroll = () => {
   const minScroll = 50
   const scrollProgress = Math.max(0, Math.min(1, (scrollY.value - minScroll) / (maxScroll - minScroll)))
 
-  // Move from 450px hidden to 50px (stops lower on page, preserves JUICE)
-  bottomSectionOffset.value = 450 - (scrollProgress * 400)
+  // Move from 650px hidden to 50px (stops lower on page, preserves JUICE)
+  bottomSectionOffset.value = 650 - (scrollProgress * 600)
 }
 
 onMounted(() => {

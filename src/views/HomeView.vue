@@ -62,8 +62,8 @@
     }"
   >
     <div class="bottom-content">
-      <h2>More content coming soon...</h2>
-      <p>This section reveals as you scroll down</p>
+      <h2>Welcome to the Next Section</h2>
+      <p>This clean white panel slides up as you scroll</p>
     </div>
   </div>
 </template>
@@ -72,19 +72,19 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const scrollY = ref(0)
-const bottomSectionOffset = ref(300) // Start mostly hidden, scroll up to cover half of JUICE
+const bottomSectionOffset = ref(450) // Start lower, show more of main page
 
 const handleScroll = () => {
   scrollY.value = window.scrollY
 
   // Calculate how much to reveal based on scroll position
-  // Start revealing after 50px of scroll, fully revealed and covering half JUICE at 600px
+  // Start revealing after 50px of scroll, stops lower to preserve more JUICE visibility
   const maxScroll = 600
   const minScroll = 50
   const scrollProgress = Math.max(0, Math.min(1, (scrollY.value - minScroll) / (maxScroll - minScroll)))
 
-  // Move from 300px hidden to -200px (covering half the JUICE logo)
-  bottomSectionOffset.value = 300 - (scrollProgress * 500)
+  // Move from 450px hidden to 50px (stops lower on page, preserves JUICE)
+  bottomSectionOffset.value = 450 - (scrollProgress * 400)
 }
 
 onMounted(() => {
@@ -196,7 +196,7 @@ onUnmounted(() => {
   left: 2rem;
   right: 2rem;
   height: 70vh;
-  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  background: white;
   z-index: 5;
   transition: transform 0.1s ease-out;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
@@ -205,7 +205,7 @@ onUnmounted(() => {
 
 .bottom-content {
   padding: 2rem;
-  color: white;
+  color: #2D3748;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -218,12 +218,13 @@ onUnmounted(() => {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  color: #2D3748;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .bottom-content p {
   font-size: 1.2rem;
-  opacity: 0.8;
+  color: #4A5568;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 

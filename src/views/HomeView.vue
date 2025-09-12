@@ -72,7 +72,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const scrollY = ref(0)
-const bottomSectionOffset = ref(100) // Start much lower, only small peek visible
+const bottomSectionOffset = ref(450) // Start with 50px visible at bottom
 
 const handleScroll = () => {
   scrollY.value = window.scrollY
@@ -83,8 +83,8 @@ const handleScroll = () => {
   const minScroll = 50
   const scrollProgress = Math.max(0, Math.min(1, (scrollY.value - minScroll) / (maxScroll - minScroll)))
 
-  // Move from 650px hidden to 50px (stops lower on page, preserves JUICE)
-  bottomSectionOffset.value = 650 - (scrollProgress * 600)
+  // Move from 450px hidden to -430px (shows 50px initially, stops 150px from top)
+  bottomSectionOffset.value = 450 - (scrollProgress * 880)
 }
 
 onMounted(() => {
@@ -195,7 +195,7 @@ onUnmounted(() => {
   bottom: 0;
   left: 2rem;
   right: 2rem;
-  height: 70vh;
+  height: 500px;
   background: white;
   z-index: 5;
   transition: transform 0.1s ease-out;
@@ -230,7 +230,7 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .bottom-section {
-    height: 60vh;
+    height: 400px;
     left: 1rem;
     right: 1rem;
   }

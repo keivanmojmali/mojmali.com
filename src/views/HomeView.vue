@@ -58,7 +58,7 @@
 
 .juice-logo {
   font-family: 'Stretch Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(2rem, 8vw, 8rem);
   font-weight: 700;
   color: #ff8356; /* Bottom layer - orange, no offset */
   text-align: left;
@@ -78,7 +78,7 @@
   position: absolute;
   background: #f7f780; /* Yellow background box */
   width: 8.5em; /* Scales with font size */
-  height: .8em; /* Scales with font size */
+  height: 0.8em; /* Scales with font size */
   opacity: 0.9;
   top: 0.1em; /* Scales with font size */
   left: -0.1em; /* Scales with font size */
@@ -241,10 +241,17 @@
   }
 }
 
+/* iPhone and small mobile */
+@media (max-width: 430px) {
+  .juice-logo {
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  }
+}
+
 /* Extra small mobile */
 @media (max-width: 360px) {
   .juice-logo {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
 
   .main-heading,

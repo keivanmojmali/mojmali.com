@@ -2,7 +2,7 @@
   <div style="height: 100vh; display: flex; flex-direction: column;">
     <!-- Main Content Section -->
     <section class="home-hero" style="background-color: #5ea85e; flex: 1; padding: 2rem 2rem; display: flex; flex-direction: column;">
-      <div style="width: 100%; max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
+      <div style="width: 100%; max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
 
         <!-- JUICE Logo SVG -->
         <svg
@@ -30,7 +30,7 @@
             </h1>
 
             <div class="secondary-heading">
-              brooklyn ny
+              brooklyn, ny
             </div>
           </div>
 
@@ -72,7 +72,7 @@
 
 .text-content {
   flex: 1;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .main-heading {
@@ -82,7 +82,7 @@
   line-height: 1.1;
   margin-bottom: 2rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-size: 4rem;
 }
 
 .secondary-heading {
@@ -91,7 +91,7 @@
   color: #2D3748;
   line-height: 1.1;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-size: 4rem;
 }
 
 .images-content {
@@ -104,7 +104,19 @@
 .patch-image {
   height: auto;
   display: block;
-  width: clamp(150px, 20vw, 300px);
+  width: 250px;
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+  .main-heading,
+  .secondary-heading {
+    font-size: 3rem;
+  }
+
+  .patch-image {
+    width: 200px;
+  }
 }
 
 /* Mobile breakpoint */
@@ -121,7 +133,7 @@
 
   .main-heading,
   .secondary-heading {
-    font-size: clamp(1.2rem, 6vw, 2rem);
+    font-size: 2.5rem;
   }
 
   .images-content {
@@ -130,27 +142,31 @@
   }
 
   .patch-image {
-    width: clamp(120px, 30vw, 200px);
+    width: 150px;
   }
 }
 
-/* Tablet breakpoint */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .patch-image {
-    width: clamp(180px, 18vw, 250px);
-  }
-}
-
-/* Large desktop breakpoint */
-@media (min-width: 1400px) {
+/* Small mobile breakpoint */
+@media (max-width: 480px) {
   .main-heading,
   .secondary-heading {
-    font-size: clamp(2.5rem, 3vw, 4rem);
+    font-size: 2rem;
   }
 
   .patch-image {
-    width: clamp(250px, 18vw, 350px);
+    width: 120px;
   }
+}
+
+.images-content a {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.images-content a:hover {
+  transform: scale(1.05);
 }
 
 </style>
+

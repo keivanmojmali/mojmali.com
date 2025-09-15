@@ -26,11 +26,11 @@
           <!-- Left Text Content -->
           <div class="text-content">
             <h1 class="main-heading">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit.
+              senior software engineer @ unanet
             </h1>
 
             <div class="secondary-heading">
-              Sed do eiusmod tempor incididunt.
+              brooklyn ny
             </div>
           </div>
 

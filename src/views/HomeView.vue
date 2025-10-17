@@ -1,7 +1,7 @@
 <template>
-  <div style="height: 100vh; display: flex; flex-direction: column;">
+  <div style="display: flex; flex-direction: column;">
     <!-- Main Content Section -->
-    <section class="home-hero" style="background-color: #5ea85e; flex: 1; padding: 2rem 2rem; display: flex; flex-direction: column;">
+  <section class="home-hero" style="flex: 1; padding: 2rem 2rem; display: flex; flex-direction: column;">
       <div style="width: 100%; max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
 
         <!-- JUICE Logo Text -->

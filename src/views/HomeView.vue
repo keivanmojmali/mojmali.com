@@ -1,15 +1,16 @@
 <template>
   <div style="display: flex; flex-direction: column;">
     <!-- Main Content Section -->
-  <section class="home-hero" style="flex: 1; padding: 2rem 2rem; display: flex; flex-direction: column;">
-      <div style="width: 100%; max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
+    <section class="home-hero" style="flex: 1; padding: 2rem 2rem; display: flex; flex-direction: column;">
+      <div
+        style="width: 100%; max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
 
         <!-- JUICE Logo Text -->
-            <h1 class="juice-logo">
-              keeeivan
-              <span class="teal-layer">keeeivan</span>
-            </h1>
-       <!-- Content Area -->
+        <h1 class="juice-logo">
+          keeeivan
+          <span class="teal-layer">keeeivan</span>
+        </h1>
+        <!-- Content Area -->
         <div class="content-container">
           <!-- Left Text Content -->
           <div class="text-content">
@@ -24,19 +25,15 @@
 
           <!-- Right Images Content -->
           <div class="images-content">
-          <a href="https://github.com/keivanmojmali" target="_blank">
-            <img
-                src="/gh-patch.png"
-                alt="GitHub Patch"
-                class="patch-image"
-              />
-          </a>
+            <a href="https://github.com/keivanmojmali" target="_blank">
+              <img src="/gh-patch.png" alt="GitHub Patch" class="patch-image" />
+            </a>
+            <a href="https://gitlab.unanet.io/keivan.mojmali" target="_blank">
+              <img src="/gl-patch.png" alt="GitLab Patch" class="patch-image" />
+            </a>
+
             <a href="https://www.linkedin.com/in/keivanmojmali/" target="_blank">
-              <img
-                src="/li-patch.png"
-                alt="LinkedIn Patch"
-                class="patch-image"
-              />
+              <img src="/li-patch.png" alt="LinkedIn Patch" class="patch-image" />
             </a>
           </div>
         </div>
@@ -60,7 +57,8 @@
   font-family: 'Stretch Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: clamp(2rem, 8vw, 8rem);
   font-weight: 700;
-  color: #ff8356; /* Bottom layer - orange, no offset */
+  color: #ff8356;
+  /* Bottom layer - orange, no offset */
   text-align: left;
   margin: clamp(0.5rem, 2vw, 1rem) 0 clamp(1.5rem, 4vw, 3rem) 0;
   letter-spacing: 0.05em;
@@ -76,14 +74,21 @@
 .juice-logo::before {
   content: '';
   position: absolute;
-  background: #f7f780; /* Yellow background box */
-  width: 8.5em; /* Scales with font size */
-  height: 0.8em; /* Scales with font size */
+  background: #f7f780;
+  /* Yellow background box */
+  width: 8.5em;
+  /* Scales with font size */
+  height: 0.8em;
+  /* Scales with font size */
   opacity: 0.9;
-  top: 0.1em; /* Scales with font size */
-  left: -0.1em; /* Scales with font size */
-  z-index: -1; /* Definitely behind all text */
-  border-radius: 0.1em; /* Scales with font size */
+  top: 0.1em;
+  /* Scales with font size */
+  left: -0.1em;
+  /* Scales with font size */
+  z-index: -1;
+  /* Definitely behind all text */
+  border-radius: 0.1em;
+  /* Scales with font size */
 }
 
 .juice-logo::after {
@@ -97,7 +102,8 @@
   letter-spacing: inherit;
   text-transform: inherit;
   font-feature-settings: inherit;
-  color: white; /* Middle layer */
+  color: white;
+  /* Middle layer */
   transform: translate(6px, 6px);
   z-index: 2;
 }
@@ -117,12 +123,10 @@
   font-feature-settings: inherit;
 }
 
-
-
-
 .content-container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   margin-top: clamp(1rem, 3vw, 2rem);
@@ -141,7 +145,7 @@
   line-height: 1.1;
   margin-bottom: clamp(1rem, 3vw, 2rem);
   font-family: 'Stretch Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.8rem, 4vw, 4rem);
+  font-size: clamp(1.8rem, 4vw, 2rem);
   font-feature-settings: "liga" 1, "clig" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1;
 }
 
@@ -151,7 +155,7 @@
   color: #2D3748;
   line-height: 1.1;
   font-family: 'Stretch Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.8rem, 4vw, 4rem);
+  font-size: clamp(1.8rem, 4vw, 1rem);
   font-feature-settings: "liga" 1, "clig" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1;
 }
 
@@ -165,7 +169,7 @@
 .patch-image {
   height: auto;
   display: block;
-  width: clamp(120px, 18vw, 280px);
+  width: clamp(60px, 18vw, 140px);
 }
 
 /* Large desktop - enhance spacing */
@@ -269,7 +273,4 @@
 .images-content a:hover {
   transform: scale(1.05);
 }
-
 </style>
-
-

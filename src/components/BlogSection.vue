@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { articles, categories } from '@/data/articles'
+import { articles, categories, type Article } from '@/data/articles'
 
 const selectedCategory = ref<string | null>(null)
 
@@ -18,7 +18,7 @@ const paddedArticles = computed(() => {
   const emptySlots = remainder === 0 ? 0 : 3 - remainder
   // Always show at least 3 slots
   const minSlots = Math.max(3, filtered.length + emptySlots)
-  const result = [...filtered]
+  const result: (Article | null)[] = [...filtered]
   while (result.length < minSlots) {
     result.push(null)
   }

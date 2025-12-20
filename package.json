@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build":"bun build ./src/main.ts --outdir ./dist",
+    "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",

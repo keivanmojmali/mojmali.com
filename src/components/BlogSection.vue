@@ -267,7 +267,7 @@ function formatDate(dateString: string) {
   margin: 0 0 1.5rem 0;
   line-height: 1.4;
   font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
+  font-style: normal;
   text-transform: uppercase;
 }
 

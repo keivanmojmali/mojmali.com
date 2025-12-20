@@ -35,23 +35,18 @@ The YouTube video we will use for the demo.
 ![YouTube video by Casey Neistat](/images/zenview-1.png)
 
 When you hit the extension while on a YouTube video, you will see this dropdown.
-
 ![Picture of the Zenview dropdown](/images/zenview-2.png)
 
 If you are not on a YouTube video, you will see this instead. 
-
 ![Picture of Zenview dropdown](/images/zenview-5.png)
 
 Once you toggle ZenView on, it will fullscreen inside of the tab.
-
 ![Picture of a YouTube video fullscreen inside of a tab](/images/zenview-3.png)
 
 Here is another look zoomed out so it is easier to see.
-
 ![Picture of Zenview fullscreen but zoomed out](/images/zenview-6.png)
 
 You can also set custom keybindings for turning ON/OFF 
-
 ![Picture of Zenview custom keybinding page](/images/zenview-4.png)
 
 ### Takeaways

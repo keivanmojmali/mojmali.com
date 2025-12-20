@@ -1,48 +1,90 @@
-<template>
-  <div style="display: flex; flex-direction: column;">
-    <!-- Main Content Section -->
-    <section class="home-hero" style="flex: 1; padding: 2rem 2rem; display: flex; flex-direction: column;">
-      <div
-        style="width: 100%; max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; flex-grow: 1; height: 100%;">
+<script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import BlogSection from '@/components/BlogSection.vue'
 
-        <!-- JUICE Logo Text -->
+const router = useRouter()
+
+let scrollTimeout: number | null = null
+
+function handleScroll() {
+  // Debounce scroll updates
+  if (scrollTimeout) {
+    window.clearTimeout(scrollTimeout)
+  }
+
+  scrollTimeout = window.setTimeout(() => {
+    const tinkeringsSection = document.getElementById('tinkerings')
+    if (tinkeringsSection) {
+      const rect = tinkeringsSection.getBoundingClientRect()
+      const isInView = rect.top <= 100 && rect.bottom > 100
+
+      // Update hash without triggering navigation
+      const currentHash = window.location.hash
+      if (isInView && currentHash !== '#tinkerings') {
+        history.replaceState(null, '', '#tinkerings')
+      } else if (!isInView && currentHash === '#tinkerings' && window.scrollY < rect.top) {
+        history.replaceState(null, '', window.location.pathname)
+      }
+    }
+  }, 100)
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  if (scrollTimeout) {
+    window.clearTimeout(scrollTimeout)
+  }
+})
+</script>
+
+<template>
+  <div class="page-container">
+    <!-- Hero Section - Above the Fold (100vh) -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <!-- Logo/Name -->
         <h1 class="juice-logo">
           keeeivan
           <span class="teal-layer">keeeivan</span>
         </h1>
-        <!-- Content Area -->
-        <div class="content-container">
-          <!-- Left Text Content -->
-          <div class="text-content">
-            <h1 class="main-heading">
-              senior software enginer @ unanet
-            </h1>
 
-            <div class="secondary-heading">
-              broooooklyn, ny
-            </div>
-          </div>
-
-          <!-- Right Images Content -->
-          <div class="images-content">
-            <a href="https://github.com/keivanmojmali" target="_blank">
-              <img src="/gh-patch.png" alt="GitHub Patch" class="patch-image" />
-            </a>
-            <a href="https://gitlab.unanet.io/keivan.mojmali" target="_blank">
-              <img src="/gl-patch.png" alt="GitLab Patch" class="patch-image" />
-            </a>
-
-            <a href="https://www.linkedin.com/in/keivanmojmali/" target="_blank">
-              <img src="/li-patch.png" alt="LinkedIn Patch" class="patch-image" />
-            </a>
+        <!-- Job Title -->
+        <div class="text-content">
+          <h2 class="main-heading">
+            senior software enginer @ unanet
+          </h2>
+          <div class="secondary-heading">
+            broooooklyn, ny
           </div>
         </div>
 
+        <!-- Patch Images -->
+        <div class="images-content">
+          <a href="https://github.com/keivanmojmali" target="_blank">
+            <img src="/gh-patch.png" alt="GitHub Patch" class="patch-image" />
+          </a>
+          <a href="https://gitlab.unanet.io/keivan.mojmali" target="_blank">
+            <img src="/gl-patch.png" alt="GitLab Patch" class="patch-image" />
+          </a>
+          <a href="https://www.linkedin.com/in/keivanmojmali/" target="_blank">
+            <img src="/li-patch.png" alt="LinkedIn Patch" class="patch-image" />
+          </a>
+        </div>
       </div>
     </section>
 
+    <!-- Main Content - White Background -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        <BlogSection />
+      </div>
+    </main>
   </div>
-
 </template>
 
 <style scoped>
@@ -53,19 +95,44 @@
   font-style: normal;
 }
 
+.page-container {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* Hero Section - Above the Fold */
+.hero-section {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  background: #5ea85e;
+  border-radius: 0 0 0.375rem 0.375rem; /* rounded-md on bottom only */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 64rem;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .juice-logo {
   font-family: 'Stretch Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(2rem, 8vw, 8rem);
+  font-size: clamp(2rem, 8vw, 5rem);
   font-weight: 700;
   color: #ff8356;
-  /* Bottom layer - orange, no offset */
   text-align: left;
-  margin: clamp(0.5rem, 2vw, 1rem) 0 clamp(1.5rem, 4vw, 3rem) 0;
+  margin: 0;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  align-self: flex-start;
   width: 100%;
-  max-width: 1300px;
   font-feature-settings: "liga" 1, "clig" 1, "dlig" 1;
   position: relative;
   z-index: 1;
@@ -75,20 +142,13 @@
   content: '';
   position: absolute;
   background: #f7f780;
-  /* Yellow background box */
   width: 8.5em;
-  /* Scales with font size */
   height: 0.8em;
-  /* Scales with font size */
   opacity: 0.9;
   top: 0.1em;
-  /* Scales with font size */
   left: -0.1em;
-  /* Scales with font size */
   z-index: -1;
-  /* Definitely behind all text */
   border-radius: 0.1em;
-  /* Scales with font size */
 }
 
 .juice-logo::after {
@@ -103,7 +163,6 @@
   text-transform: inherit;
   font-feature-settings: inherit;
   color: white;
-  /* Middle layer */
   transform: translate(6px, 6px);
   z-index: 2;
 }
@@ -123,19 +182,8 @@
   font-feature-settings: inherit;
 }
 
-.content-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: clamp(1rem, 3vw, 2rem);
-  gap: clamp(1rem, 3vw, 2rem);
-}
-
 .text-content {
-  flex: 1;
-  max-width: 600px;
+  width: 100%;
 }
 
 .main-heading {
@@ -143,10 +191,10 @@
   text-transform: uppercase;
   color: #2D3748;
   line-height: 1.1;
-  margin-bottom: clamp(1rem, 3vw, 2rem);
+  margin: 0 0 1rem 0;
   font-family: 'Stretch Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2rem);
-  font-feature-settings: "liga" 1, "clig" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-feature-settings: "liga" 1, "clig" 1, "dlig" 1;
 }
 
 .secondary-heading {
@@ -155,122 +203,79 @@
   color: #2D3748;
   line-height: 1.1;
   font-family: 'Stretch Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.8rem, 4vw, 1rem);
-  font-feature-settings: "liga" 1, "clig" 1, "dlig" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "ss05" 1;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-feature-settings: "liga" 1, "clig" 1, "dlig" 1;
 }
 
 .images-content {
   display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
 }
 
 .patch-image {
   height: auto;
   display: block;
-  width: clamp(60px, 18vw, 140px);
-}
-
-/* Large desktop - enhance spacing */
-@media (min-width: 1400px) {
-  .content-container {
-    gap: 3rem;
-  }
-
-  .juice-logo {
-    margin-bottom: 4rem;
-  }
-}
-
-/* Tablet landscape */
-@media (max-width: 1200px) {
-  .content-container {
-    gap: 2rem;
-  }
-}
-
-/* Tablet portrait */
-@media (max-width: 900px) {
-  .content-container {
-    gap: 2rem;
-  }
-
-  .text-content {
-    max-width: 100%;
-  }
-}
-
-/* Mobile breakpoint */
-@media (max-width: 768px) {
-  .content-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-  }
-
-  .text-content {
-    max-width: 100%;
-  }
-
-  .images-content {
-    width: 100%;
-    justify-content: flex-start;
-    gap: 1.5rem;
-  }
-
-  /* Reduce section padding on mobile */
-  .home-hero {
-    padding: 1.5rem 1.5rem !important;
-  }
-}
-
-/* Small mobile */
-@media (max-width: 480px) {
-  .content-container {
-    gap: 1.5rem;
-  }
-
-  .images-content {
-    gap: 1rem;
-  }
-
-  .main-heading {
-    margin-bottom: 1rem;
-  }
-
-  /* Even less padding on small mobile */
-  .home-hero {
-    padding: 1rem 1rem !important;
-  }
-}
-
-/* iPhone and small mobile */
-@media (max-width: 430px) {
-  .juice-logo {
-    font-size: clamp(1.8rem, 10vw, 2.5rem);
-  }
-}
-
-/* Extra small mobile */
-@media (max-width: 360px) {
-  .juice-logo {
-    font-size: 1.8rem;
-  }
-
-  .main-heading,
-  .secondary-heading {
-    font-size: 1.5rem;
-  }
+  width: 100%;
+  max-width: 200px;
 }
 
 .images-content a {
-  display: inline-block;
+  flex: 1;
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   transition: transform 0.2s ease;
 }
 
 .images-content a:hover {
   transform: scale(1.05);
+}
+
+/* Main Content - White Background */
+.main-content {
+  padding: 3rem 2rem;
+  background: #ffffff;
+}
+
+.content-wrapper {
+  max-width: 64rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 1.5rem;
+  }
+
+  .hero-content {
+    gap: 1.5rem;
+  }
+
+  .main-content {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 1rem;
+  }
+
+  .hero-content {
+    gap: 1rem;
+  }
+
+  .main-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .images-content {
+    gap: 0.75rem;
+  }
 }
 </style>

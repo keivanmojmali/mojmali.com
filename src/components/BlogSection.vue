@@ -231,10 +231,12 @@ function formatDate(dateString: string) {
   min-height: 280px;
 }
 
-/* Remove duplicate borders between columns */
-.article-cell:nth-child(3n + 2),
-.article-cell:nth-child(3n + 3) {
-  border-left: none;
+/* Remove duplicate borders between columns (3-col layout only) */
+@media (min-width: 901px) {
+  .article-cell:nth-child(3n + 2),
+  .article-cell:nth-child(3n + 3) {
+    border-left: none;
+  }
 }
 
 .article-card {
@@ -345,6 +347,11 @@ function formatDate(dateString: string) {
     min-height: auto;
     border-right: 10px solid #ff8356;
     border-left: 10px solid #ff8356;
+    border-top: 10px solid #ff8356;
+  }
+
+  .article-cell:first-child {
+    border-top: none;
   }
 
   /* Hide empty cells on tablet */
@@ -366,8 +373,13 @@ function formatDate(dateString: string) {
   .article-cell {
     border-right: 10px solid #ff8356;
     border-left: 10px solid #ff8356;
+    border-top: 10px solid #ff8356;
     min-height: auto;
     padding: 1rem;
+  }
+
+  .article-cell:first-child {
+    border-top: none;
   }
 
   /* Hide empty cells on mobile */

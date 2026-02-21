@@ -82,7 +82,9 @@ function formatDate(dateString: string) {
           <article v-if="article" class="article-card">
             <router-link :to="`/article/${article.slug}`" class="article-link">
               <!-- Image -->
-              <img :src="article.image" :alt="article.title" class="article-image" />
+              <div class="article-image-frame">
+                <img :src="article.image" :alt="article.title" class="article-image" />
+              </div>
 
               <!-- Content -->
               <h3 class="article-title">{{ article.title }}</h3>
@@ -244,7 +246,9 @@ function formatDate(dateString: string) {
 }
 
 .article-link {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -255,9 +259,22 @@ function formatDate(dateString: string) {
   color: white;
 }
 
+.article-image-frame {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 .article-image {
   width: 100%;
-  margin-bottom: 1rem;
+  height: 100%;
+  object-fit: contain;
 }
 
 .article-title {
@@ -275,6 +292,7 @@ function formatDate(dateString: string) {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
   font-size: 0.875rem;
   color: #718096;
 }

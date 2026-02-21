@@ -1,10 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const isLoading = ref(true)
 const progress = ref(0)
 
+const route = useRoute()
+const isHome = computed(() => route.path === '/')
+
 onMounted(() => {
+  if (!isHome.value) {
+    isLoading.value = false
+    progress.value = 100
+    return
+  }
+
   trackAssetLoading()
 })
 
@@ -110,7 +120,7 @@ function preloadImage(url: string): Promise<void> {
 
 <template>
   <Transition name="fade">
-    <div v-if="isLoading" class="loading-screen">
+    <div v-if="isLoading && isHome" class="loading-screen">
       <!-- Green fill that grows from bottom to top -->
       <div class="loading-fill" :style="{ height: `${progress}%` }"></div>
 

@@ -30,7 +30,7 @@ It gives you a full slide editor in a single component.
 **One-Component Setup**  
 Drop it in and go.
 
-**Asset-Based**  
+**Asset Based**  
 Built for fixed dimensions like 16:9, A4, or social formats, not infinite scroll documents.
 
 **50+ Extensions**  

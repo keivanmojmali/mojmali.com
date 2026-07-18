@@ -17,6 +17,15 @@ export const articles: Article[] = [
     contentPath: '/content/zenview-chrome-extension.md',
     date: '2024-12-17',
     category: 'Projects'
+  },
+  {
+    slug: 'blockslides-toolkit',
+    title: 'Blockslides: WYSIWYG slide deck editor toolkit',
+    subtitle: 'Slide editor built on ProseMirror',
+    image: '/bs-patch.png',
+    contentPath: '/content/blockslides-toolkit.md',
+    date: '2024-05-22',
+    category: 'Projects'
   }
 ]
 

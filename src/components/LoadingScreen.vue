@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const isHome = computed(() => route.path === '/')
 
 // The public assets that make up the above-the-fold home experience.
 const PUBLIC_IMAGES = ['/gh-patch.png', '/gl-patch.png', '/li-patch.png', '/favicon.svg']
@@ -121,7 +122,7 @@ function preloadImage(url: string): Promise<void> {
 
 <template>
   <Transition name="fade">
-    <div v-if="isLoading" class="loading-screen">
+    <div v-if="isLoading && isHome" class="loading-screen">
       <!-- Green fill that grows from bottom to top -->
       <div class="loading-fill" :style="{ height: `${progress}%` }"></div>
 

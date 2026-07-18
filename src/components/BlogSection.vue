@@ -48,7 +48,9 @@ function formatDate(dateString: string) {
           <article v-if="article" class="article-card">
             <router-link :to="`/article/${article.slug}`" class="article-link">
               <!-- Image -->
-              <img :src="article.image" :alt="article.title" class="article-image" />
+              <div class="article-image-frame">
+                <img :src="article.image" :alt="article.title" class="article-image" />
+              </div>
 
               <!-- Content -->
               <h3 class="article-title">{{ article.title }}</h3>
@@ -167,10 +169,12 @@ function formatDate(dateString: string) {
   min-height: 280px;
 }
 
-/* Remove duplicate borders between columns */
-.article-cell:nth-child(3n + 2),
-.article-cell:nth-child(3n + 3) {
-  border-left: none;
+/* Remove duplicate borders between columns (3-col layout only) */
+@media (min-width: 901px) {
+  .article-cell:nth-child(3n + 2),
+  .article-cell:nth-child(3n + 3) {
+    border-left: none;
+  }
 }
 
 .article-card {
@@ -182,7 +186,9 @@ function formatDate(dateString: string) {
 }
 
 .article-link {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
   color: inherit;
 }
@@ -193,9 +199,22 @@ function formatDate(dateString: string) {
   color: white;
 }
 
+.article-image-frame {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 .article-image {
   width: 100%;
-  margin-bottom: 1rem;
+  height: 100%;
+  object-fit: contain;
 }
 
 .article-title {
@@ -213,6 +232,7 @@ function formatDate(dateString: string) {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
   font-size: 0.875rem;
   color: #718096;
 }
@@ -265,6 +285,11 @@ function formatDate(dateString: string) {
     min-height: auto;
     border-right: 10px solid #ff8356;
     border-left: 10px solid #ff8356;
+    border-top: 10px solid #ff8356;
+  }
+
+  .article-cell:first-child {
+    border-top: none;
   }
 
   /* Hide empty cells on tablet */
@@ -286,8 +311,13 @@ function formatDate(dateString: string) {
   .article-cell {
     border-right: 10px solid #ff8356;
     border-left: 10px solid #ff8356;
+    border-top: 10px solid #ff8356;
     min-height: auto;
     padding: 1rem;
+  }
+
+  .article-cell:first-child {
+    border-top: none;
   }
 
   /* Hide empty cells on mobile */

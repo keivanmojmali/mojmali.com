@@ -20,7 +20,8 @@ import LoadingScreen from './components/LoadingScreen.vue'
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: #5ea85e;
+  background-color: #ffffff;
+  overflow-x: hidden;
 }
 
 

@@ -1,33 +1,19 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { articles, categories, type Article } from '@/data/articles'
-
-const selectedCategory = ref<string | null>(null)
-
-const filteredArticles = computed(() => {
-  if (!selectedCategory.value) {
-    return articles
-  }
-  return articles.filter(a => a.category === selectedCategory.value)
-})
+import { computed } from 'vue'
+import { articles, type Article } from '@/data/articles'
 
 // Pad to ensure we always have rows of 3
 const paddedArticles = computed(() => {
-  const filtered = filteredArticles.value
-  const remainder = filtered.length % 3
+  const remainder = articles.length % 3
   const emptySlots = remainder === 0 ? 0 : 3 - remainder
   // Always show at least 3 slots
-  const minSlots = Math.max(3, filtered.length + emptySlots)
-  const result: (Article | null)[] = [...filtered]
+  const minSlots = Math.max(3, articles.length + emptySlots)
+  const result: (Article | null)[] = [...articles]
   while (result.length < minSlots) {
     result.push(null)
   }
   return result
 })
-
-function selectCategory(category: string | null) {
-  selectedCategory.value = category
-}
 
 function formatDate(dateString: string) {
   const date = new Date(dateString)
@@ -47,26 +33,6 @@ function formatDate(dateString: string) {
         <span class="orange-layer">tinkerings</span>
       </h2>
     </div>
-
-    <!-- Category Tabs -->
-    <nav class="category-tabs">
-      <button
-        class="category-tab"
-        :class="{ active: selectedCategory === null }"
-        @click="selectCategory(null)"
-      >
-        All
-      </button>
-      <button
-        v-for="category in categories"
-        :key="category"
-        class="category-tab"
-        :class="{ active: selectedCategory === category }"
-        @click="selectCategory(category)"
-      >
-        {{ category }}
-      </button>
-    </nav>
 
     <!-- Full-width wrapper for grid with horizontal lines -->
     <div class="grid-wrapper">
@@ -174,34 +140,6 @@ function formatDate(dateString: string) {
   font-weight: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
-}
-
-.category-tabs {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.category-tab {
-  background: none;
-  border: none;
-  padding: 0.5rem 0;
-  font-size: 1rem;
-  color: #4a5568;
-  cursor: pointer;
-  transition: color 0.2s ease;
-  font-family: inherit;
-  text-transform: uppercase;
-}
-
-.category-tab:hover {
-  color: #1a202c;
-}
-
-.category-tab.active {
-  color: #1a202c;
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
 /* Full-width wrapper - breaks out of container */
@@ -355,11 +293,6 @@ function formatDate(dateString: string) {
   /* Hide empty cells on mobile */
   .article-cell.empty-cell {
     display: none !important;
-  }
-
-  .category-tabs {
-    gap: 1rem;
-    flex-wrap: wrap;
   }
 }
 </style>

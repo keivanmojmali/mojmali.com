@@ -59,7 +59,7 @@ onUnmounted(() => {
             senior software enginer @ unanet
           </h2>
           <div class="secondary-heading">
-            broooooklyn, ny
+            sssan franciscoooo, ca
           </div>
         </div>
 

@@ -57,6 +57,12 @@
   margin: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);

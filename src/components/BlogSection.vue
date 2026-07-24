@@ -17,9 +17,8 @@ const paddedArticles = computed(() => {
 
 function formatDate(dateString: string) {
   const date = new Date(dateString)
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  return `${month}/${day}`
+  const year = String(date.getFullYear()).slice(-2)
+  return `${year}'`
 }
 </script>
 

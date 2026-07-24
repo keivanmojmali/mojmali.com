@@ -10,6 +10,15 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: 'naturally-occurring-abstract-art-nyc',
+    title: 'Naturally Occurring Abstract Art of New York City',
+    subtitle: 'The abstract language of New York’s subway panels',
+    image: '/abstract-patch.png',
+    contentPath: '/content/naturally-occurring-abstract-art-nyc.md',
+    date: '2026-07-24',
+    category: 'Writing'
+  },
+  {
     slug: 'zenview-chrome-extension',
     title: 'ZenView Chrome Extension',
     subtitle: 'Fullscreen YouTube videos inside of a tab',

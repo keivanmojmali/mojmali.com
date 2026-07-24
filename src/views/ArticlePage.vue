@@ -10,6 +10,12 @@ const router = useRouter()
 const slug = computed(() => route.params.slug as string)
 const article = computed(() => articles.find(a => a.slug === slug.value))
 
+const formattedDate = computed(() => {
+  if (!article.value) return ''
+  const year = String(new Date(article.value.date).getFullYear()).slice(-2)
+  return `${year}'`
+})
+
 const content = ref('')
 const isLoading = ref(true)
 
@@ -70,7 +76,7 @@ function goHome() {
           <div class="article-meta">
             <span class="article-category">{{ article.category }}</span>
             <span class="meta-dot">•</span>
-            <time class="article-date">{{ article.date }}</time>
+            <time class="article-date">{{ formattedDate }}</time>
           </div>
         </header>
 

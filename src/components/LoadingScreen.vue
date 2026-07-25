@@ -8,18 +8,30 @@ const isHome = computed(() => route.path === '/')
 // The public assets that make up the above-the-fold home experience.
 const PUBLIC_IMAGES = ['/gh-patch.png', '/gl-patch.png', '/li-patch.png', '/favicon.svg']
 
-// Decide up front whether a loading screen is even warranted. We only show it
-// on the home route, and only when the page/assets are NOT already loaded.
-const isLoading = ref(shouldShowLoading())
+// The assets whose presence in the browser cache decides whether we bother
+// showing the loading screen at all.
+const CRITICAL_ASSETS = [...PUBLIC_IMAGES, '/fonts/StretchPro.otf']
+
+// Provisionally show the screen on the home route. `onMounted` then probes the
+// browser cache and hides it immediately if everything is already cached —
+// this works even on a full page reload, when `document.readyState` is not yet
+// `'complete'` and so can't tell us whether the assets are available.
+const isLoading = ref(route.path === '/')
 const progress = ref(0)
 
 let interval: number | null = null
 
-onMounted(() => {
-  if (isLoading.value) {
-    lockScroll(true)
-    trackAssetLoading()
+onMounted(async () => {
+  if (!isLoading.value) return
+
+  // If a prior visit already warmed the cache, skip the animation entirely.
+  if (await allAssetsCached()) {
+    isLoading.value = false
+    return
   }
+
+  lockScroll(true)
+  trackAssetLoading()
 })
 
 onUnmounted(() => {
@@ -27,25 +39,21 @@ onUnmounted(() => {
   lockScroll(false)
 })
 
-// Only load on the home page, and only when assets aren't already available
-// (fresh full-page load, or images not yet in the browser cache).
-function shouldShowLoading(): boolean {
-  if (route.path !== '/') return false
-
-  const documentReady = document.readyState === 'complete'
-  const fontsReady = document.fonts.status === 'loaded'
-  const imagesCached = PUBLIC_IMAGES.every(isImageCached)
-
-  // Everything's already here — skip the animation entirely.
-  if (documentReady && fontsReady && imagesCached) return false
-
-  return true
+// Ask the browser cache directly whether every critical asset is already
+// present. `cache: 'only-if-cached'` resolves only on a cache hit and rejects
+// otherwise, so a single rejection means "not fully cached — show the screen".
+async function allAssetsCached(): Promise<boolean> {
+  try {
+    await Promise.all(CRITICAL_ASSETS.map(isCached))
+    return true
+  } catch {
+    return false
+  }
 }
 
-function isImageCached(url: string): boolean {
-  const img = new Image()
-  img.src = url
-  return img.complete && img.naturalWidth > 0
+async function isCached(url: string): Promise<void> {
+  const res = await fetch(url, { cache: 'only-if-cached', mode: 'same-origin' })
+  if (!res.ok) throw new Error(`not cached: ${url}`)
 }
 
 // Prevent the page behind the overlay from scrolling (kills the stray

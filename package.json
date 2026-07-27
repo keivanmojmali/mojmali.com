@@ -9,10 +9,11 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "run-p type-check \"build-only {@}\" -- && npm run prerender-meta",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
+    "prerender-meta": "node scripts/prerender-meta.mjs",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"

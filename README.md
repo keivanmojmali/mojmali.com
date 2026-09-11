@@ -1,6 +1,6 @@
 # mojmali.com
 
-Personal website of Keivan Mojmali - Senior Software Engineer at Unanet, based in Brooklyn, NY.
+Personal website of Keivan Mojmali - Senior Software Engineer at Unanet, based in San Francisco, CA.
 
 ## Tech Stack
 
@@ -41,4 +41,4 @@ npm run preview
 
 ---
 
-Built with care in Brooklyn, NY 🌆
+Built with care in San Francisco, CA 🌆
